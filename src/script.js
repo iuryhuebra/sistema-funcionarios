@@ -1,13 +1,19 @@
-import { consultaAPI, filtrar } from './funcionarios/funcionarios.js'
+import { cadastrar, consultaAPI, filtrar } from './funcionarios/funcionarios.js'
 
 // Referências do DOM HTML
 
 const btnIncluir = document.getElementById('btnIncluir')
-const modalProdutos = document.getElementById('modalProdutos')
-const btnFecharModal = document.getElementById('btnFecharModal')
-// const btnFiltrar = document.getElementById('btnFiltrar')
 const inpFiltrarNome = document.getElementById('inpFiltrarNome')
 const tbodyList = document.getElementById('tbodyList')
+
+const modalProdutos = document.getElementById('modalProdutos')
+const btnFecharModal = document.getElementById('btnFecharModal')
+const btnIncluirModal = document.getElementById('btnIncluirModal')
+const inputNome= document.getElementById('inputNome')
+const inputDep= document.getElementById('inputDep')
+const inputFunc= document.getElementById('inputFunc')
+const inputSal= document.getElementById('inputSal')
+
 
 // Lógica
 
@@ -21,9 +27,20 @@ btnFecharModal.onclick = ()=>{
     modalProdutos.close()
 }
 
+btnIncluirModal.onclick = ()=>{
+    let dados = {'nome': inputNome.value,
+    'departamento': inputDep.value,
+    'funcao': inputFunc.value,
+    'salario': inputSal.value
+    }
+
+    cadastrar(dados)
+}
+
 inpFiltrarNome.onchange = ()=>{
     filtrar(inpFiltrarNome.value, response)
 }
+
 
 tbodyList.addEventListener('click', (event) => {
     const target = event.target

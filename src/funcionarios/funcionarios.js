@@ -1,4 +1,5 @@
 import funcionarios from '../../databases/banco.js'
+import { api } from '../../services/api.js'
 
 // Referência do DOM HTML
 
@@ -8,9 +9,15 @@ const tbodyList = document.getElementById('tbodyList')
 // Lógica
 
 export async function consultaAPI() {
-    const response = await funcionarios
-    atualizarTabela(response.banco)
-    return response.banco
+    try {
+        const response = await api.get('listfunc')
+        atualizarTabela(response.data.result)
+        return response.data.result
+        
+    } catch (error) { 
+        console.log({'MSG':error})
+        
+    }
 }
 
 export function atualizarTabela(dados) {
@@ -39,4 +46,13 @@ export function filtrar(nomeBusca, response){
         funcionario.nome.toLowerCase().includes(nomeBusca.toLowerCase())
     )
     atualizarTabela(produtosFiltrados)
+}
+
+export function cadastrar(dados){
+    try {
+        const response = api.post('createfunc', dados)
+        
+    } catch (error) {
+        console.log({'MSG':error})
+    }
 }
