@@ -1,4 +1,4 @@
-import { cadastrar, consultaAPI, filtrar } from './funcionarios/funcionarios.js'
+import { cadastrar, consultaAPI, deletar, filtrar } from './funcionarios/funcionarios.js'
 
 // Referências do DOM HTML
 
@@ -59,7 +59,7 @@ tbodyList.addEventListener('click', (event) => {
         console.log(dados);
           
         if (target.id == 'btnTrash') {
-            exibirDadosModal(dados , 1)
+            deletar(dados.id)
             
         }
        

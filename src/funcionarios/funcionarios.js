@@ -36,8 +36,8 @@ export function atualizarTabela(dados) {
                     <td>${dados[i].funcao}</td>
                     <td>${dados[i].salario}</td>
                     <td>
-                            <img id="btnTrash" onclick="deletePro(this)"><img src="../assets/trash.png" class="icons">
-                            <img id="btnEdit" onclick="alteraPro(this)"><img src="../assets/edit2.png" class="icons">
+                            <img id="btnTrash" src="../assets/trash.png" class="icons">
+                            <img id="btnEdit" src="../assets/edit2.png" class="icons">
                     </td>
                 </tr>`
     }
@@ -71,8 +71,37 @@ export async function cadastrar(dados){
 }
 
 function limparModal() {
-    inputNome.value = ""
-    inputDep.value = ""
-    inputFunc.value = ""
-    inputSal.value = ""
+    inputNome.value = ''
+    inputDep.value = ''
+    inputFunc.value = ''
+    inputSal.value = ''
+}
+
+export async function deletar(id) {
+    try {
+        Swal.fire({
+            title: 'Deseja excluir o funcionário?',
+            showDenyButton: true,
+            confirmButtonText: 'Sim',
+            denyButtonText: 'Não',
+            customClass: {
+                actions: 'my-actions',
+                confirmButton: 'order-2',
+                denyButton: 'order-3',
+            },
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const response = await api.delete(`func/${id}`)
+                console.log(response);
+                if(response.status == 200){
+                    consultaAPI()
+                }
+                Swal.fire('Excluído com sucesso!', '', 'success')
+            }
+          })
+        
+    } catch (error) {
+        console.log({'MSG':error})
+    }
+
 }
