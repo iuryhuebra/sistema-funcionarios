@@ -4,7 +4,11 @@ import { api } from '../../services/api.js'
 // Referência do DOM HTML
 
 const tbodyList = document.getElementById('tbodyList')
-
+const modalProdutos = document.getElementById('modalProdutos')
+const inputNome= document.getElementById('inputNome')
+const inputDep= document.getElementById('inputDep')
+const inputFunc= document.getElementById('inputFunc')
+const inputSal= document.getElementById('inputSal')
 
 // Lógica
 
@@ -48,11 +52,27 @@ export function filtrar(nomeBusca, response){
     atualizarTabela(produtosFiltrados)
 }
 
-export function cadastrar(dados){
+export async function cadastrar(dados){
     try {
-        const response = api.post('createfunc', dados)
+        const response = await api.post('createfunc', dados)
+        if (response.status == 201){
+            modalProdutos.close()
+            Swal.fire({
+                title: "Cadastro efetuado com sucesso",
+                icon: "success"
+            })
+            consultaAPI()
+            limparModal()
+        }
         
     } catch (error) {
         console.log({'MSG':error})
     }
+}
+
+function limparModal() {
+    inputNome.value = ""
+    inputDep.value = ""
+    inputFunc.value = ""
+    inputSal.value = ""
 }
