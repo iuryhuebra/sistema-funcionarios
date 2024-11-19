@@ -5,6 +5,7 @@ import { api } from '../../services/api.js'
 
 const tbodyList = document.getElementById('tbodyList')
 const modalProdutos = document.getElementById('modalProdutos')
+const inputId= document.getElementById('inputId')
 const inputNome= document.getElementById('inputNome')
 const inputDep= document.getElementById('inputDep')
 const inputFunc= document.getElementById('inputFunc')
@@ -104,4 +105,42 @@ export async function deletar(id) {
         console.log({'MSG':error})
     }
 
+}
+
+export function exibirDadosModal(dados) {
+    
+    inputId.value = dados.id
+    inputNome.value = dados.nome
+    inputDep.value = dados.dep
+    inputFunc.value = dados.funcao
+    inputSal.value = dados.sal
+
+    modalProdutos.showModal()
+}
+
+export function pegarDadosModal() {
+    const dados = {
+        id: inputId.value,
+        nome: inputNome.value,
+        departamento: inputDep.value,
+        funcao: inputFunc.value,
+        salario: inputSal.value
+    }     
+
+    return dados
+}
+
+export async function alterar(dados) {
+    try {
+        const response = await api.put(`func/${dados.id}`, dados)
+        if (response.status == 201){
+            Swal.fire('Alterado com sucesso!', '', 'success')
+        }
+
+    } catch (error) {
+        console.log({'MSG':error}) 
+    }
+    modalProdutos.close()
+    limparModal()
+    consultaAPI()
 }

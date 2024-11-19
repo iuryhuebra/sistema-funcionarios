@@ -1,0 +1,31 @@
+Comununicação Client <-> Server: Através de uma API com a biblioteca Axios.
+
+API 
+    - GET: Coleta de dados no servidor.
+    - POST: Adição de informações ao servidor.
+    - PUT: Modificação de informações do servidor.
+    - DELETE: Remoção de informações do servidor.
+
+Axios
+    - const api = axios.create({baseURL:url}): Cria conexão com a API.
+
+    - const response = await api.get('endpoint'): Realiza requisição GET no url/endpoint. 
+        > Requisição é uma promessa e pode demorar a ser respondida, por isso deve se usar o await e adicionar o async antes do function, caso seja uma função.
+
+JS
+    - import/export: Importação e exportação de script para reutilização no projeto.
+        > export variavel: exporta variavel.
+        > export default nome.js: exporta todo o arquivo.
+        > import { objeto } from '/caminho/arquivo.js': importa objeto do arquivo informado.
+
+    - referencias DOM:
+        > document.getElementById(id): referencia elemento a partir do id.
+        > document.getElementsByClassName(class): referencia elemento a partir da classe.
+        > element.value: retorna o valor atribuido ao elemento, possível reatribuir novo valor.
+
+    - try/catch(error): 
+        > executa comandos no try, caso aconteça um erro o bloco de código try é interrompido.
+        > após isso, inicia o catch e o erro é armazenando na váriavel entre parenteses.
+        > try evita que o sistema interrompa pelo erro.
+
+    

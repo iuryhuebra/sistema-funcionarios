@@ -1,4 +1,4 @@
-import { cadastrar, consultaAPI, deletar, filtrar } from './funcionarios/funcionarios.js'
+import { cadastrar, consultaAPI, deletar, filtrar , exibirDadosModal, pegarDadosModal, alterar } from './funcionarios/funcionarios.js'
 
 // Referências do DOM HTML
 
@@ -9,6 +9,8 @@ const tbodyList = document.getElementById('tbodyList')
 const modalProdutos = document.getElementById('modalProdutos')
 const btnFecharModal = document.getElementById('btnFecharModal')
 const btnIncluirModal = document.getElementById('btnIncluirModal')
+const btnAlterarModal = document.getElementById('btnAlterarModal')
+
 const inputNome= document.getElementById('inputNome')
 const inputDep= document.getElementById('inputDep')
 const inputFunc= document.getElementById('inputFunc')
@@ -64,7 +66,14 @@ tbodyList.addEventListener('click', (event) => {
         }
        
         else if (target.id == 'btnEdit') {
-            exibirDadosModal(dados, 2)
+            exibirDadosModal(dados)
         }
     }
 })
+
+btnAlterarModal.onclick = ()=>{
+    const dados = pegarDadosModal()
+    console.log(dados);
+    
+    alterar(dados)
+}
